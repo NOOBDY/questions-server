@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"NOOBDY/questions_server/data"
 	"log"
 	"net/http"
 	"strconv"
@@ -9,40 +8,27 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Questions handler for getting questions
 type Questions struct {
 	l *log.Logger
 }
 
+// NewQuestions returns a new questions handler with the given logger
 func NewQuestions(l *log.Logger) *Questions {
 	return &Questions{l}
 }
 
-func (q *Questions) GetQuestions(w http.ResponseWriter, r *http.Request) {
-	q.l.Println("Handle GET Questions")
-
-	lq := data.GetQuestions()
-
-	err := lq.ToJSON(w)
-
-	if err != nil {
-		http.Error(w, "Unable to marshal JSON", http.StatusInternalServerError)
-	}
+// GenericError is a generic error message returned by a server
+type GenericError struct {
+	Message string `json:"message"`
 }
 
-func (q *Questions) GetQuestion(w http.ResponseWriter, r *http.Request) {
+func getQuestionID(r *http.Request) int {
 	vars := mux.Vars(r)
+
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
-		http.Error(w, "Unable to convert id", http.StatusBadRequest)
+		panic(err)
 	}
-
-	q.l.Println("Handle GET Question", id)
-
-	question := data.GetQuestion(id)
-
-	err = question.ToJSON(w)
-
-	if err != nil {
-		http.Error(w, "Unable to convert id", http.StatusBadRequest)
-	}
+	return id
 }

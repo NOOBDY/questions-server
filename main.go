@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/go-openapi/runtime/middleware"
 	"github.com/gorilla/mux"
 )
 
@@ -20,10 +21,14 @@ func main() {
 	sm := mux.NewRouter()
 
 	getQuestionRouter := sm.Methods(http.MethodGet).Subrouter()
+	getQuestionRouter.HandleFunc("/", qh.GetQuestions)
 	getQuestionRouter.HandleFunc("/{id:[0-9]+}", qh.GetQuestion)
 
-	getQuestionsRouter := sm.Methods(http.MethodGet).Subrouter()
-	getQuestionsRouter.HandleFunc("/", qh.GetQuestions)
+	opts := middleware.RedocOpts{SpecURL: "/swagger.yaml"}
+	sh := middleware.Redoc(opts, nil)
+
+	getQuestionRouter.Handle("/docs", sh)
+	getQuestionRouter.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
 
 	s := http.Server{
 		Addr:         ":8080",
@@ -48,6 +53,7 @@ func main() {
 	signal.Notify(c, os.Interrupt)
 	signal.Notify(c, os.Kill)
 
+	// Block until a signal is received
 	sig := <-c
 	log.Println("Got signal: ", sig)
 

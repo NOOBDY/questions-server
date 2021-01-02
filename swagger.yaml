@@ -1,0 +1,11 @@
+basePath: /
+consumes:
+- application/json
+info:
+  description: Documentation for Question API
+  title: classification of Question API
+  version: 1.0.0
+paths: {}
+schemes:
+- http
+swagger: "2.0"
