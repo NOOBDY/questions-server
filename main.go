@@ -21,8 +21,8 @@ func main() {
 	sm := mux.NewRouter()
 
 	getQuestionRouter := sm.Methods(http.MethodGet).Subrouter()
-	getQuestionRouter.HandleFunc("/", qh.GetQuestions)
-	getQuestionRouter.HandleFunc("/{id:[0-9]+}", qh.GetQuestion)
+	getQuestionRouter.HandleFunc("/questions", qh.GetQuestions)
+	getQuestionRouter.HandleFunc("/questions/{id:[0-9]+}", qh.GetQuestion)
 
 	opts := middleware.RedocOpts{SpecURL: "/swagger.yaml"}
 	sh := middleware.Redoc(opts, nil)
@@ -57,6 +57,7 @@ func main() {
 	sig := <-c
 	log.Println("Got signal: ", sig)
 
-	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
 	s.Shutdown(ctx)
 }

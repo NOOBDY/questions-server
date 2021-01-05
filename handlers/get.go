@@ -8,6 +8,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// swagger:route GET /questions questions listQuestions
+// Returns a list of questions from the database
+// responses:
+// 	200: questionsResponse
+
 // GetQuestions handlers GET request and returns all current products
 func (q *Questions) GetQuestions(w http.ResponseWriter, r *http.Request) {
 	q.l.Println("Handle GET Questions")
@@ -20,6 +25,12 @@ func (q *Questions) GetQuestions(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Unable to marshal JSON", http.StatusInternalServerError)
 	}
 }
+
+// swagger:route GET /questions/{id} questions listQuestion
+// Returns a single question from the database
+// responses:
+//	200: questionResponse
+//	404: errorResponse
 
 // GetQuestion handles GET requests
 func (q *Questions) GetQuestion(w http.ResponseWriter, r *http.Request) {

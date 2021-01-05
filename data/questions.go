@@ -16,10 +16,10 @@ var ErrQuestionNotFound = fmt.Errorf("Product not found")
 //swagger:model
 type Question struct {
 	Question string `json:"question"`
-	OptionA  string `json:"optionA"`
-	OptionB  string `json:"optionB"`
-	OptionC  string `json:"optionC"`
-	OptionD  string `json:"optionD"`
+	OptionA  string `json:"option_a"`
+	OptionB  string `json:"option_b"`
+	OptionC  string `json:"option_c"`
+	OptionD  string `json:"option_d"`
 	Answer   string `json:"answer"`
 }
 
