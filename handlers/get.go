@@ -17,6 +17,8 @@ import (
 func (q *Questions) GetQuestions(w http.ResponseWriter, r *http.Request) {
 	q.l.Println("Handle GET Questions")
 
+	w.Header().Add("Content-Type", "application/json")
+
 	questions := data.GetQuestions()
 
 	err := data.ToJSON(questions, w)
@@ -41,6 +43,8 @@ func (q *Questions) GetQuestion(w http.ResponseWriter, r *http.Request) {
 	}
 
 	q.l.Println("Handle GET Question", id)
+
+	w.Header().Add("Content-Type", "application/json")
 
 	question, err := data.GetQuestion(id)
 
