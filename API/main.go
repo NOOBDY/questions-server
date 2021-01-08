@@ -1,7 +1,6 @@
 package main
 
 import (
-	"NOOBDY/questions_server/handlers"
 	"context"
 	"log"
 	"net/http"
@@ -9,6 +8,7 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/NOOBDY/questions_server/handlers"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/gorilla/mux"
 )

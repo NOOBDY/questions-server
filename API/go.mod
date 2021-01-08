@@ -1,4 +1,4 @@
-module NOOBDY/questions_server
+module github.com/NOOBDY/questions_server
 
 go 1.15
 

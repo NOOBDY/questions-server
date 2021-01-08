@@ -10,7 +10,7 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"NOOBDY/questions_server/sdk/client/questions"
+	"github.com/NOOBDY/questions_server/sdk/client/questions"
 )
 
 // Default questions server HTTP client.

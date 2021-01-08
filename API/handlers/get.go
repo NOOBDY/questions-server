@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"NOOBDY/questions_server/data"
 	"net/http"
 	"strconv"
 
+	"github.com/NOOBDY/questions_server/data"
 	"github.com/gorilla/mux"
 )
 

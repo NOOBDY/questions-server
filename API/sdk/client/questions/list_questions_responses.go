@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"NOOBDY/questions_server/sdk/models"
+	"github.com/NOOBDY/questions_server/sdk/models"
 )
 
 // ListQuestionsReader is a Reader for the ListQuestions structure.

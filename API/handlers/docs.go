@@ -12,7 +12,7 @@
 // swagger:meta
 package handlers
 
-import "NOOBDY/questions_server/data"
+import "github.com/NOOBDY/questions_server/data"
 
 // Generic error message returned as a string
 // swagger:response errorResponse
