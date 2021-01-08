@@ -12,8 +12,8 @@ export default {
     };
   },
   async created() {
-    const response = await axios.get("https://api.npms.io/v2/search?q=vue");
-    this.totalVuePackages = response.data.total;
+    const response = await axios.get("localhost:8080/questions/0");
+    this.totalVuePackages = response.data.question;
   },
 };
 </script>
