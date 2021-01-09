@@ -1,19 +1,26 @@
 <template>
-  <div>Total Value Packages: {{ totalVuePackages }}</div>
+  <div>
+    <h1>Questions: {{ q.question }}</h1>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+
 export default {
-  name: "GetQuestions",
   data() {
     return {
-      totalVuePackages: null,
+      q: null,
     };
   },
-  async created() {
-    const response = await axios.get("localhost:8080/questions/0");
-    this.totalVuePackages = response.data.question;
+  created() {
+    axios
+      .get("http://localhost:9090/questions/0")
+      .then((response) => (this.q = response.data))
+      .catch((error) => {
+        this.errorMessage = error.message;
+        console.error("Error: ", error);
+      });
   },
 };
 </script>

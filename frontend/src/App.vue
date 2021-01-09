@@ -1,22 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <GetQuestions/>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <get-questions />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import GetQuestions from './components/GetQuestions.vue'
+import GetQuestions from "./components/GetQuestions.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     GetQuestions,
-    HelloWorld
-  }
-}
+  },
+};
 </script>
 
 <style>
