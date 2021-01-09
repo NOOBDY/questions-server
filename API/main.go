@@ -10,6 +10,7 @@ import (
 
 	"github.com/NOOBDY/questions_server/handlers"
 	"github.com/go-openapi/runtime/middleware"
+	gohandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -30,9 +31,12 @@ func main() {
 	getQuestionRouter.Handle("/docs", sh)
 	getQuestionRouter.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
 
+	// CORS
+	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"http://localhost:8080"}))
+
 	s := http.Server{
-		Addr:         ":8080",
-		Handler:      sm,
+		Addr:         ":9090",
+		Handler:      ch(sm),
 		ErrorLog:     l,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
@@ -40,7 +44,7 @@ func main() {
 	}
 
 	go func() {
-		l.Println("Starting server on port 8080")
+		l.Println("Starting server on port 9090")
 
 		err := s.ListenAndServe()
 		if err != nil {
